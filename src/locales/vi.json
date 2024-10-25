@@ -1,0 +1,15 @@
+{
+  "movies": "Phim",
+  "tvShows": "Chương trình TV",
+  "popularPeople": "Người nổi tiếng",
+  "discussions": "Thảo luận",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "language": "Ngôn ngữ",
+  "popular": "Phổ biến",
+  "nowPlaying": "Đang phát",
+  "upcoming": "Sắp ra mắt",
+  "topRated": "Đánh giá cao",
+  "airingToday": "Phát sóng hôm nay",
+  "onTV": "Trên TV"
+}
