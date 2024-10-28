@@ -1,6 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+    opacity: 0; 
+    height: 10px;
+  }
+
+  .scrollbar-visible:hover::-webkit-scrollbar {
+    opacity: 1; 
+    height: 10px;
+  }
+
+  .scrollbar-visible::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 10px; 
+  }
+
+  .scrollbar-visible::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
+}
 
 body {
   margin: 0;
