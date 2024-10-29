@@ -1,0 +1,15 @@
+{
+  "movies": "Movies",
+  "tvShows": "TV Shows",
+  "popularPeople": "Popular People",
+  "discussions": "Discussions",
+  "login": "Login",
+  "register": "Register",
+  "language": "Language",
+  "popular": "Popular",
+  "nowPlaying": "Now Playing",
+  "upcoming": "Upcoming",
+  "topRated": "Top Rated",
+  "airingToday": "Airing Today",
+  "onTV": "On TV"
+}
