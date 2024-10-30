@@ -18,5 +18,17 @@
   "terms": "Terms of use",
   "quickLink": "Quick Link",
   "account": "Account",
-  "myAccount": "My account"
+  "myAccount": "My account",
+  "watchNow": "Watch now",
+  "trending": "Trending",
+  "recentlyReleased": "Recently Released",
+  "leaderboard": "Leaderboard",
+  "rank": "Rank",
+  "rating": "Rating",
+  "votes": "Votes",
+  "addToList": "Add to List",
+  "favorite": "Favorite",
+  "watchlist": "Watchlist",
+  "rating2": "Rating",
+  "viewDetails": "View details"
 }
