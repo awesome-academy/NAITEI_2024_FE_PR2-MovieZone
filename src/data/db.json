@@ -4011,5 +4011,13 @@
       "id": 37,
       "name": "Western"
     }
+  ],
+  "users": [
+    {
+      "email": "tin332810@gmail.com",
+      "password": "$2a$10$nM9kI6ZKlvW85FYWXVWkJ.0WkPewBTagok2Ob9zq9wfSQ4Xr72qh2",
+      "username": "Tin Nguyen",
+      "id": 1
+    }
   ]
 }

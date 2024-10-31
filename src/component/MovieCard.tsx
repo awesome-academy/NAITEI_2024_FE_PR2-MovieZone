@@ -21,8 +21,8 @@ const MovieCard: React.FC<MovieCardProps> = ({
       <Link to={`/movie/${movie.id}`} className="block">
         <img
           src={style === "horizontal" 
-            ? `https://image.tmdb.org/t/p/w300${movie.backdrop_path}` 
-            : `https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+            ? require(`../assets/image/movie/backdrop${movie.backdrop_path}`) 
+            : require(`../assets/image/movie/poster${movie.poster_path}`)}
           alt={movie.title}
           onMouseEnter={() => onMouseEnter(movie)}
           className="rounded transition hover:scale-105"

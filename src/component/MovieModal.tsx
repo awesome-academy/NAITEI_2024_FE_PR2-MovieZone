@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MovieModalProps } from "../movie.type";
 import Close from "../assets/icon/close.svg";
 import MovieMenu from "./MovieMenu";
+import Tooltip from "./Tooltip";
 
 const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
   const { t } = useTranslation();
@@ -23,14 +24,17 @@ const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
         </button>
         <div className="flex">
           <img
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+            // src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+            src={require(`../assets/image/movie/poster${movie.poster_path}`)}
             alt={movie.title}
             className="w-1/3 object-cover"
           />
           <div className="p-4 w-2/3">
             <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
             <p className="text-gray-400 mb-2">{movie.release_date}</p>
-            <p className="text-gray-200 md:text-sm text-xs">{movie.overview}</p>
+            <Tooltip text={movie.overview}>
+              <p className="text-gray-200 md:text-sm text-xs line-clamp-4">{movie.overview}</p>
+            </Tooltip>
             <div className="mt-4 flex items-center">
               <span className="text-yellow-400 font-bold text-lg">{movie.vote_average.toFixed(1)} </span>/10
             </div>

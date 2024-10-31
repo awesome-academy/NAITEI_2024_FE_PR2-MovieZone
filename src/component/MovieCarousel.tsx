@@ -11,7 +11,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
 
   const backgroundImage =
     style === "horizontal" && activeMovie
-      ? `url(https://image.tmdb.org/t/p/original${activeMovie.backdrop_path})`
+      ? require(`../assets/image/movie/backdrop${activeMovie.backdrop_path}`)
       : undefined;
 
   const handleMouseLeave = () => {
@@ -39,7 +39,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
         {style === "horizontal" && activeMovie && (
           <div
             className="absolute inset-0 bg-cover bg-center transition-all duration-300 opacity-40"
-            style={{ backgroundImage }}
+            style={{ backgroundImage: `url(${backgroundImage})` }}
           />
         )}
 

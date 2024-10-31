@@ -30,5 +30,21 @@
   "favorite": "Favorite",
   "watchlist": "Watchlist",
   "rating2": "Rating",
-  "viewDetails": "View details"
+  "viewDetails": "View details",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "loginFailed": "Email or password is incorrect!",
+  "registerFailed": "This email has been registered!",
+  "noAccount": "Don't have an account?",
+  "haveAccount": "Already have an account?",
+  "logout": "Logout",
+  "passwordTooShort": "*Password must be longer than 5 characters.",
+  "usernameTooShort": "*Username must be longer than 5 characters.",
+  "passwordMismatch": "*Passwords do not match!",
+  "invalidEmail": "*Please enter a valid email address.",
+  "viewProfile": "View Profile",
+  "discuss": "Discussion",
+  "list": "List"
 }
