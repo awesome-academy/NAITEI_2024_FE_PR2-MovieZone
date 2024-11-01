@@ -72,3 +72,25 @@ export interface MovieMenuProps {
   toggleMenu: () => void;
   position?: "right" | "left";
 }
+
+export interface UserInfo {
+  username: string;
+  email: string;
+  id: string;
+}
+
+export interface FormField {
+  name: string;
+  type: string;
+  placeholder: string;
+  validation: (value: string) => boolean;
+  errorMessage: string;
+}
+
+export interface CustomFormProps {
+  fields: FormField[];
+  onSubmit: (data: Record<string, string>) => Promise<void>;
+  submitButtonText: string;
+  formData: Record<string, string>;
+  setFormData: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+}

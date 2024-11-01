@@ -30,5 +30,21 @@
   "favorite": "Yêu thích",
   "watchlist": "Danh sách xem",
   "rating2": "Đánh giá",
-  "viewDetails": "Xem chi tiết"
+  "viewDetails": "Xem chi tiết",
+  "username": "Tên người dùng",
+  "email": "Email",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "loginFailed": "Email hoặc mật khẩu không chính xác!",
+  "registerFailed": "Email này đã được đăng ký!",
+  "noAccount": "Bạn chưa có tài khoản?",
+  "haveAccount": "Bạn đã có tài khoản?",
+  "logout": "Đăng xuất",
+  "passwordTooShort": "*Mật khẩu phải dài hơn 5 ký tự.",
+  "usernameTooShort": "*Tên người dùng phải dài hơn 5 ký tự.",
+  "passwordMismatch": "*Mật khẩu không khớp!",
+  "invalidEmail": "*Vui lòng nhập địa chỉ email hợp lệ.",
+  "viewProfile": "Xem hồ sơ",
+  "discuss": "Thảo luận",
+  "list": "Danh sách"
 }

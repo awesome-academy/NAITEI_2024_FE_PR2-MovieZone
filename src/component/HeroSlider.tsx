@@ -26,7 +26,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ movies }) => {
             key={movie.id}
             className="w-full flex-shrink-0 h-[400px] md:h-[700px] relative bg-cover bg-center"
             style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+              backgroundImage: `url(${require(`../assets/image/movie/backdrop${movie.backdrop_path}`)})`
             }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end items-start md:pl-16 md:pb-16 pl-6 pb-6">
