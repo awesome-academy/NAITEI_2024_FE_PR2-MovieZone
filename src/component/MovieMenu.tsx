@@ -24,16 +24,16 @@ const MovieMenu: React.FC<MovieMenuProps> = ({ isOpen, toggleMenu, position="rig
       >
         <ul className="text-sm text-gray-700">
           <li className="px-4 py-2 hover:bg-primary hover:text-white cursor-pointer flex items-center gap-2 group whitespace-nowrap rounded-t-lg">
-            <ListIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('addToList')}
+            <ListIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('home.addToList')}
           </li>
           <li className="px-4 py-2 hover:bg-primary hover:text-white cursor-pointer flex items-center gap-2 group whitespace-nowrap">
-            <HeartIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('favorite')}
+            <HeartIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('home.favorite')}
           </li>
           <li className="px-4 py-2 hover:bg-primary hover:text-white cursor-pointer flex items-center gap-2 group whitespace-nowrap">
-            <BookmarkIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('watchlist')}
+            <BookmarkIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('home.watchlist')}
           </li>
           <li className="px-4 py-2 hover:bg-primary hover:text-white cursor-pointer flex items-center gap-2 group whitespace-nowrap rounded-b-lg">
-            <StarIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('rating2')}
+            <StarIcon className="w-5 h-5 fill-black group-hover:fill-white" /> {t('home.rating2')}
           </li>
         </ul>
       </div>

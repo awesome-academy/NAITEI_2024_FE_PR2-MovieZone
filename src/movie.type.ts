@@ -20,6 +20,7 @@ export interface Movie {
   backdrop_path: string;
   adult: boolean;
   genre_ids: number[];
+  original_language: string;
 }
 
 export interface Genre {
@@ -61,8 +62,8 @@ export interface MovieModalProps {
 
 export interface MovieCardProps {
   movie: Movie;
-  style: "vertical" | "horizontal";
-  onMouseEnter: (movie: Movie) => void;
+  style?: "vertical" | "horizontal";
+  onMouseEnter?: (movie: Movie) => void;
   activeMenuId: number | null;
   setActiveMenuId: (id: number | null) => void;
 }
@@ -93,4 +94,71 @@ export interface CustomFormProps {
   submitButtonText: string;
   formData: Record<string, string>;
   setFormData: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+}
+
+export interface AvatarMenuProps {
+  userInfo: UserInfo;
+  handleLogout: () => void;
+}
+
+export interface AlertProps {
+  message: string;
+  type?: "success" | "warning" | "error" | "info";
+  onClose: () => void;
+}
+
+export interface Filters {
+  selectedGenres: number[];
+  releaseDateRange: [string, string];
+  voteAverageRange: [number, number];
+  originalLanguage: string;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface Language {
+  iso_639_1: string;
+  english_name: string;
+}
+
+export interface FilterSidebarProps {
+  onFilterChange: (filters: { selectedGenres: number[], releaseDateRange: [string, string], voteAverageRange: [number, number], originalLanguage: string }) => void;
+  filters: Filters;
+}
+
+export interface RatingFilterProps {
+  voteAverageRange: [number, number];
+  onVoteChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+}
+
+export interface GenresFilterProps {
+  genres: Genre[];
+  selectedGenres: number[];
+  onGenreChange: (genreId: number) => void;
+}
+
+export interface ReleaseDateFilterProps {
+  releaseDateRange: [string, string];
+  onDateChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+}
+
+export interface LanguageFilterProps {
+  originalLanguage: string;
+  languages: Language[];
+  onLanguageChange: (language: string) => void;
+}
+
+export interface CardsPerPageFilterProps {
+  cardsPerPage: number;
+  onCardsPerPageChange: (value: number) => void;
+}
+
+export interface MovieListDropdownProps<T> {
+  label: string;
+  selectedValue: T | null;
+  options: { value: T | null; label: string }[];
+  onChange: (value: T | null) => void;
 }

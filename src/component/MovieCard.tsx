@@ -17,14 +17,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <div className={style === "horizontal" ? "md:min-w-[305px] min-w-[230px] relative" : "md:min-w-[240px] min-w-[180px] mb-3 relative"}>
+    <div className={`relative p-2 ${style === "horizontal" ? "md:min-w-[305px] min-w-[230px]" : "md:min-w-[240px] min-w-[180px] mb-3"}`}>
       <Link to={`/movie/${movie.id}`} className="block">
         <img
           src={style === "horizontal" 
             ? require(`../assets/image/movie/backdrop${movie.backdrop_path}`) 
             : require(`../assets/image/movie/poster${movie.poster_path}`)}
           alt={movie.title}
-          onMouseEnter={() => onMouseEnter(movie)}
+          onMouseEnter={() => onMouseEnter?.(movie)}
           className="rounded transition hover:scale-105"
         />
       </Link>
@@ -36,7 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
         </span>
       </div>
 
-      <div className="absolute top-2 right-2">
+      <div className="absolute top-3 right-3">
         <MovieMenu isOpen={isActiveMenu} toggleMenu={toggleMenu} />
       </div>
     </div>

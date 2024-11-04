@@ -63,9 +63,9 @@ const Homepage: React.FC = () => {
   return (
     <div className="text-white">
       <HeroSlider movies={trendingMovies.slice(0, 5)} />
-      <MovieCarousel title={t('trending')} movies={trendingMovies} />
-      <MovieCarousel title={t('recentlyReleased')} movies={recentlyReleased} style="horizontal"/>
-      <MovieCarousel title={t('topRated')} movies={topRatedMovies} />
+      <MovieCarousel title={t('home.trending')} movies={trendingMovies} />
+      <MovieCarousel title={t('home.recentlyReleased')} movies={recentlyReleased} style="horizontal"/>
+      <MovieCarousel title={t('home.topRated')} movies={topRatedMovies} />
       <Leaderboard
         movies={leaderboardMovies}
         onSort={handleSort}
