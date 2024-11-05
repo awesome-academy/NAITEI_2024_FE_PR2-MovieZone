@@ -32,19 +32,19 @@ const Leaderboard: React.FC<LeaderboardProps> = ({
 
   return (
     <div className="my-8 container max-w-screen-xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">{t('leaderboard')}</h2>
+      <h2 className="text-2xl font-semibold mb-4">{t('home.leaderboard')}</h2>
       <div className="bg-dark rounded-lg p-4 shadow-md">
         <table className="w-full text-left text-sm text-gray-200">
           <thead>
             <tr className="border-b border-gray-700 font-bold">
-              <th className="py-2 px-4">{t('rank')}</th>
-              <th className="py-2 px-4">{t('movies')}</th>
+              <th className="py-2 px-4">{t('home.rank')}</th>
+              <th className="py-2 px-4">{t('home.movies')}</th>
               <th
                 className="py-2 px-4 cursor-pointer"
                 onClick={() => onSort("vote_average")}
               >
                 <div className="flex items-center">
-                  <span>{t('rating')}</span>
+                  <span>{t('home.rating')}</span>
                   {sortField === "vote_average" && (
                     sortOrder === "asc" 
                       ? <img src={angleUp} alt="Angle Up" className="ml-1" /> 
@@ -57,7 +57,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({
                 onClick={() => onSort("vote_count")}
               >
                 <div className="flex items-center">
-                  <span>{t('votes')}</span>
+                  <span>{t('home.votes')}</span>
                   {sortField === "vote_count" && (
                     sortOrder === "asc" 
                       ? <img src={angleUp} alt="Angle Up" className="ml-1" /> 

@@ -18,42 +18,42 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col space-y-2">
-          <h3 className="text-lg font-semibold mb-2 uppercase">{t('information')}</h3>
+          <h3 className="text-lg font-semibold mb-2 uppercase">{t('footer.information')}</h3>
           <a href="/about" className="hover:text-primary hover:scale-105 transition">
-            {t('aboutMovieZone')}
+            {t('footer.aboutMovieZone')}
           </a>
           <a href="/privacy" className="hover:text-primary hover:scale-105 transition">
-            {t('privacy')}
+            {t('footer.privacy')}
           </a>
           <a href="/terms" className="hover:text-primary hover:scale-105 transition">
-            {t('terms')}
+            {t('footer.terms')}
           </a>
         </div>
 
         <div className="flex flex-col space-y-2">
-          <h3 className="text-lg font-semibold mb-2 uppercase">{t('quickLink')}</h3>
+          <h3 className="text-lg font-semibold mb-2 uppercase">{t('footer.quickLink')}</h3>
           <a href="/movies" className="hover:text-primary hover:scale-105 transition">
-            {t('movies')}
+            {t('footer.movies')}
           </a>
           <a href="/tv" className="hover:text-primary hover:scale-105 transition">
-            {t('tvShows')}
+            {t('footer.tvShows')}
           </a>
           <a href="/person" className="hover:text-primary hover:scale-105 transition">
-            {t('popularPeople')}
+            {t('footer.popularPeople')}
           </a>
         </div>
 
 
         <div className="flex flex-col space-y-2">
-          <h3 className="text-lg font-semibold mb-2 uppercase">{t('account')}</h3>
+          <h3 className="text-lg font-semibold mb-2 uppercase">{t('footer.account')}</h3>
           <a href="/account" className="hover:text-primary hover:scale-105 transition">
-            {t('myAccount')}
+            {t('footer.myAccount')}
           </a>
           <a href="/login" className="hover:text-primary hover:scale-105 transition">
-            {t('login')}
+            {t('footer.login')}
           </a>
           <a href="/register" className="hover:text-primary hover:scale-105 transition">
-            {t('register')}
+            {t('footer.register')}
           </a>
         </div>
 

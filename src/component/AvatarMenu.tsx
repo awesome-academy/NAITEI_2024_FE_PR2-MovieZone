@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { UserInfo } from "../movie.type";
-
-interface AvatarMenuProps {
-  userInfo: UserInfo;
-  handleLogout: () => void;
-}
+import { AvatarMenuProps } from "../movie.type";
 
 const AvatarMenu: React.FC<AvatarMenuProps> = ({ userInfo, handleLogout }) => {
   const { t } = useTranslation();
@@ -29,39 +24,39 @@ const AvatarMenu: React.FC<AvatarMenuProps> = ({ userInfo, handleLogout }) => {
         <div className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 origin-top w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-white"></div>
         <a href="/account" className="block px-4 py-2 text-dark">
           <p>{userInfo.username}</p>
-          <p className="text-xs text-gray-600">{t("viewProfile")}</p>
+          <p className="text-xs text-gray-600">{t("header.viewProfile")}</p>
         </a>
         <hr />
         <a
           href="/account/watchlist"
           className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
         >
-          {t("discuss")}
+          {t("header.discuss")}
         </a>
         <a
           href="/account/watchlist"
           className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
         >
-          {t("list")}
+          {t("header.list")}
         </a>
         <a
           href="/account/ratings"
           className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
         >
-          {t("rating2")}
+          {t("header.rating2")}
         </a>
         <a
           href="/account/watchlist"
           className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
         >
-          {t("watchlist")}
+          {t("header.watchlist")}
         </a>
         <hr />
         <button
           onClick={handleLogout}
           className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
         >
-          {t("logout")}
+          {t("header.logout")}
         </button>
       </div>
     </div>

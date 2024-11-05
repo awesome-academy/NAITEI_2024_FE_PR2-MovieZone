@@ -40,6 +40,10 @@ const Pagination: React.FC<PaginationProps> = ({
     return pages;
   };
 
+  if (totalPages <=1 ) {
+    return null;
+  }
+
   return (
     <div className="flex justify-center mt-4 space-x-2">
       <button

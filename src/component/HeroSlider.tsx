@@ -35,7 +35,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ movies }) => {
                 <p className="text-gray-200 mt-2 md:text-xl text-xs">{movie.overview}</p>
                 <Link to={`/movie/${movie.id}`}>
                   <button className="bg-primary text-white font-semibold md:py-3 md:px-6 py-1 px-2 rounded mt-4 hover:bg-red-800">
-                    {t('watchNow')}
+                    {t('home.watchNow')}
                   </button>
                 </Link>
               </div>

@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-
-interface AlertProps {
-  message: string;
-  type?: "success" | "warning" | "error" | "info";
-  onClose: () => void;
-}
+import { AlertProps } from "../movie.type";
 
 const Alert: React.FC<AlertProps> = ({ message, type = "success", onClose }) => {
   const typeClasses = {
@@ -21,7 +16,7 @@ const Alert: React.FC<AlertProps> = ({ message, type = "success", onClose }) => 
 
   return (
     <div
-      className={`fixed top-4 right-4 border-l-4 p-4 rounded-md mb-4 flex items-center gap-2 ${
+      className={`fixed top-4 right-4 border-l-4 p-4 rounded-md mb-4 flex items-center gap-2 z-50 ${
         typeClasses[type]
       }`}
     >

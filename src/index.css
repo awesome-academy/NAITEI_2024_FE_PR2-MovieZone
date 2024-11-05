@@ -20,6 +20,46 @@
   .scrollbar-visible::-webkit-scrollbar-thumb:hover {
     background-color: rgba(128, 128, 128, 0.3);
   }
+  
+  .thumb,
+  .thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .thumb::-webkit-slider-thumb {
+    background-color: #f1f5f7;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 1px #ced4da;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    pointer-events: all;
+    position: relative;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+  
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .scrollbar::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+  }
 }
 
 body {
