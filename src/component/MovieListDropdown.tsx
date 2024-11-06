@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { ReactComponent as AngleDown } from "../assets/icon/angle-downV.svg";
 import { MovieListDropdownProps } from "../movie.type";
+import useToggleVisibility from "../utils/useToggleVisibility";
 
 const MovieListDropdown = <T,>({
   label,
@@ -8,8 +9,7 @@ const MovieListDropdown = <T,>({
   options,
   onChange,
 }: MovieListDropdownProps<T>) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { isOpen, setIsOpen, toggle, elementRef } = useToggleVisibility();
 
   const handleOptionClick = (value: T | null) => {
     onChange(value);
@@ -18,25 +18,12 @@ const MovieListDropdown = <T,>({
 
   const selectedLabel = options.find(option => option.value === selectedValue)?.label;
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <div className="relative flex items-center justify-end mt-3" ref={dropdownRef}>
+    <div className="relative flex items-center justify-end mt-3" ref={elementRef}>
       <span className="mr-2 text-sm">{label}:</span>
       <div className="inline-block relative">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggle}
           className="bg-white border-2 text-dark text-sm rounded-md flex p-1 hover:border-primary"
         >
           {selectedLabel}

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcherProps } from "../movie.type";
 import enFlag from "../assets/image/en.jpg";
 import viFlag from "../assets/image/vi.png";
 import angleDown from "../assets/icon/angle-down.svg";
 import angleRight from "../assets/icon/angle-right.svg";
+import useToggleVisibility from "../utils/useToggleVisibility";
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false }) => {
   const { i18n } = useTranslation();
   const language = localStorage.getItem("language") || "vi";
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, toggle, elementRef } = useToggleVisibility();
 
   const handleLanguageChange = (lang: string) => {
     localStorage.setItem("language", lang)
@@ -17,16 +18,13 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false })
     setIsOpen(false);
   };
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <div 
       className={`relative ${isMobile ? "w-5/6 mx-auto" : "" }`}
+      ref={elementRef}
     >
       <button
-        onClick={toggleDropdown}
+        onClick={toggle}
         className="flex items-center space-x-2 hover:text-primary transition"
       >
         <img

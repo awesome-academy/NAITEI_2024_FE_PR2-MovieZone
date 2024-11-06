@@ -10,9 +10,9 @@ export interface LanguageSwitcherProps {
 
 export interface Movie {
   id: number;
-  title: string;
+  title?: string;
   poster_path: string;
-  release_date: string;
+  release_date?: string;
   popularity: number;
   vote_average: number;
   vote_count: number;
@@ -21,11 +21,10 @@ export interface Movie {
   adult: boolean;
   genre_ids: number[];
   original_language: string;
-}
-
-export interface Genre {
-  id: number;
-  name: string;
+  origin_country?: string[];
+  original_name?: string;
+  first_air_date?: string;
+  name?: string;
 }
 
 export interface HeroSliderProps {
@@ -64,8 +63,6 @@ export interface MovieCardProps {
   movie: Movie;
   style?: "vertical" | "horizontal";
   onMouseEnter?: (movie: Movie) => void;
-  activeMenuId: number | null;
-  setActiveMenuId: (id: number | null) => void;
 }
 
 export interface MovieMenuProps {
@@ -161,4 +158,22 @@ export interface MovieListDropdownProps<T> {
   selectedValue: T | null;
   options: { value: T | null; label: string }[];
   onChange: (value: T | null) => void;
+}
+
+export interface Person {
+  id: number;
+  name: string;
+  profile_path: string;
+  popularity: number;
+  known_for: Array<{
+    id: number;
+    title: string;
+    name: string;
+    media_type: "movie" | "tv";
+    poster_path: string;
+  }>;
+}
+
+export interface PeopleCardProps {
+  person: Person;
 }

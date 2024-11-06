@@ -14,7 +14,6 @@ import { ReactComponent as Filter } from "../assets/icon/filter.svg";
 const MoviePage: React.FC = () => {
   const { t } = useTranslation();
   const urlParams = new URLSearchParams(window.location.search);
-  const [activeMenuId, setActiveMenuId] = useState<number | null>(null);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filters, setFilters] = useState<Filters>({
     selectedGenres: urlParams.getAll('genre').map(genre => Number(genre)) as number[],
@@ -34,8 +33,9 @@ const MoviePage: React.FC = () => {
   const sort = urlParams.get('sort');
   const order = urlParams.get('order');
   const [sortBy, setSortBy] = useState<string | null>(sort && order ? `${sort}.${order}` : null);
-  const debouncedFilters = useDebounce(filters, 500);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [applyFilter, setApplyFilter] = useState<boolean>(false);
+  const debouncedApplyFilter = useDebounce(applyFilter, 500);
 
   const updateUrlParams = (updatedFilters: Filters, limit?: number, page?: number, sort?: string | null) => {
     const newUrlParams = new URLSearchParams();
@@ -55,28 +55,32 @@ const MoviePage: React.FC = () => {
     if (limit) newUrlParams.set('limit', limit.toString());
     if (page) newUrlParams.set('page', page.toString());
   
-    window.history.replaceState({}, '', `${window.location.pathname}?${newUrlParams.toString()}`);
+    window.history.pushState({}, '', `${window.location.pathname}?${newUrlParams.toString()}`);
   };
 
   const handleFilterChange = (updatedFilters: Filters) => {
     setFilters(updatedFilters);
     setCurrentPage(1);
+    setApplyFilter(true);
   };
 
   const handleCardsPerPageChange = (value: number | null) => {
     if (value !== null) {
       setCardsPerPage(value);
       setCurrentPage(1);
+      setApplyFilter(true);
     }
   };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    setApplyFilter(true);
   };
 
   const handleSortChange = (value: string | null) => {
     setSortBy(value);
     setCurrentPage(1);
+    setApplyFilter(true);
   };
 
   const handleResetFilters = () => {
@@ -91,7 +95,7 @@ const MoviePage: React.FC = () => {
   };
 
   const buildQueryParams = () => {
-    const { selectedGenres, releaseDateRange, voteAverageRange, originalLanguage } = debouncedFilters;
+    const { selectedGenres, releaseDateRange, voteAverageRange, originalLanguage } = filters;
 
     const queryParts = [
       selectedGenres.length > 0 && selectedGenres.map((genre) => `genre_ids_like=${genre}`).join('&'),
@@ -125,16 +129,22 @@ const MoviePage: React.FC = () => {
   ];
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const queryParams = buildQueryParams();
-      const response = await fetchData("movie", queryParams);
-      setMovies(response.data);
-      setTotalPages(Math.ceil(response.totalCount / cardsPerPage));
-    };
+    if (applyFilter) {
+      const fetchMovies = async () => {
+        const queryParams = buildQueryParams();
+        const response = await fetchData("movie", queryParams);
+        setMovies(response.data);
+        setTotalPages(Math.ceil(response.totalCount / cardsPerPage));
+        setApplyFilter(false);
+      };
 
-    fetchMovies();
-    updateUrlParams(debouncedFilters, cardsPerPage, currentPage, sortBy);
-  }, [debouncedFilters, cardsPerPage, currentPage, sortBy]);
+      fetchMovies();
+    }
+  }, [debouncedApplyFilter]);
+
+  useEffect(() => {
+    updateUrlParams(filters, cardsPerPage, currentPage, sortBy);
+  }, [filters, cardsPerPage, currentPage, sortBy]);
 
   useEffect(() => {
     if (isFilterVisible) {
@@ -181,8 +191,6 @@ const MoviePage: React.FC = () => {
               <MovieCard
                 key={movie.id}
                 movie={movie}
-                activeMenuId={activeMenuId}
-                setActiveMenuId={setActiveMenuId}
               />
             ))}
           </div>

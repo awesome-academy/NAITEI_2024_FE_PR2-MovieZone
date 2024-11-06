@@ -5,11 +5,13 @@ import logo from "../assets/image/logo.jpg";
 import Dropdown from "../component/Dropdown";
 import LanguageSwitcher from "../component/LanguageSwitcher";
 import AvatarMenu from "../component/AvatarMenu";
-import Menu from "../assets/icon/menu.svg";
-import Close from "../assets/icon/close.svg";
+import { ReactComponent as MenuIcon } from "../assets/icon/menu.svg";
+import { ReactComponent as SearchIcon } from "../assets/icon/search.svg";
+import { ReactComponent as CloseIcon } from "../assets/icon/close.svg";
 import { UserInfo } from "../movie.type";
 import { getUserInfo } from "../utils/storageHelpers";
 import { useAlert } from '../context/AlertContext';
+import useToggleVisibility from "../utils/useToggleVisibility";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -17,6 +19,16 @@ const Header: React.FC = () => {
   const { setAlert } = useAlert();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo  | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isOpen, toggle, elementRef } = useToggleVisibility();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleClear = () => {
+    setSearchTerm("");
+  };
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -30,6 +42,12 @@ const Header: React.FC = () => {
     setUserInfo(null);
     setAlert({ message: t('header.logoutAlert'), type: 'info' });
     navigate("/")
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchTerm.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   const moviesItems = [
@@ -48,7 +66,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="bg-dark text-white sticky top-0 z-50 font-semibold">
-      <div className="container max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
+      <div className="container max-w-screen-xl mx-auto flex items-center justify-between p-4">
         <div className="text-2xl font-bold text-primary">
           <a href="/">
             <img 
@@ -74,11 +92,20 @@ const Header: React.FC = () => {
           {userInfo ? (
             <AvatarMenu userInfo={userInfo} handleLogout={handleLogout} />
           ) : null}
+          
+          <button onClick={toggle} className="text-white focus:outline-none">
+            {isOpen ? (
+              <CloseIcon className="h-5 w-5 text-white" />
+            ) : (
+              <SearchIcon className="h-5 w-5 text-white" />
+            )}
+          </button>
+          
           <button
             className={`${isMenuOpen ? "bg-primary" : "bg-gray-600"}  text-white focus:outline-none p-2 duration-300 transform`}
             onClick={toggleMenu}
           >
-            {isMenuOpen ? (<img src={Close} alt="Close icon" />) : (<img src={Menu} alt="Menu icon" />)}
+            {isMenuOpen ? (<CloseIcon className="text-white" />) : (<MenuIcon />)}
           </button>
 
         </div>
@@ -136,8 +163,36 @@ const Header: React.FC = () => {
               </a>
             </div>
           )}
+          
+          <button onClick={toggle} className="text-white focus:outline-none">
+            {isOpen ? (
+              <CloseIcon className="h-5 w-5 text-white" />
+            ) : (
+              <SearchIcon className="h-5 w-5 text-white" />
+            )}
+          </button>
         </div>
       </div>
+
+      {isOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white rounded-md shadow-md mt-2 py-1" ref={elementRef}>
+          <div className="relative container max-w-screen-xl mx-auto flex items-center justify-between">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              placeholder={t("moviePage.search")}
+              className="w-full px-4 py-2 bg-white text-dark focus:outline-none"
+            />
+            {searchTerm && (
+              <button onClick={handleClear} className="absolute right-4 text-black">
+                <CloseIcon className="h-5 w-5 fill-black" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 };

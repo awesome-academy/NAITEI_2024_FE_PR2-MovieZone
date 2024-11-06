@@ -4,7 +4,6 @@ import MovieCard from "./MovieCard";
 
 const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "vertical" }) => {
   const [activeMovie, setActiveMovie] = useState<Movie | null>(null);
-  const [activeMenuId, setActiveMenuId] = useState<number | null>(null);
   const [showLeftGradient, setShowLeftGradient] = useState(false);
   const [showRightGradient, setShowRightGradient] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -13,10 +12,6 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
     style === "horizontal" && activeMovie
       ? require(`../assets/image/movie/backdrop${activeMovie.backdrop_path}`)
       : undefined;
-
-  const handleMouseLeave = () => {
-    setActiveMenuId(null);
-  };
 
   const handleScroll = () => {
     if (carouselRef.current) {
@@ -33,7 +28,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
   }, [movies]);
 
   return (
-    <div className="my-8 container max-w-screen-xl mx-auto p-4" onMouseLeave={handleMouseLeave}>
+    <div className="my-8 container max-w-screen-xl mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">{title}</h2>
       <div className="relative flex gap-4 overflow-x-auto">
         {style === "horizontal" && activeMovie && (
@@ -54,8 +49,6 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
               movie={movie}
               style={style}
               onMouseEnter={setActiveMovie}
-              activeMenuId={activeMenuId}
-              setActiveMenuId={setActiveMenuId}
             />
           ))}
         </div>
