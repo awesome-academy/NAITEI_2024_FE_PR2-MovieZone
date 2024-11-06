@@ -89,5 +89,15 @@
     "voteAverageAsc": "Điểm đánh giá (Tăng dần)",
     "releaseDateDesc": "Ngày phát hành (Mới nhất)",
     "releaseDateAsc": "Ngày phát hành (Cũ nhất)"
+  },
+  "popularPeoplePage": {
+    "popularPeople": "Người nổi tiếng"
+  },
+  "searchPage": {
+    "searchResults": "Kết quả tìm kiếm",
+    "movie": "Phim",
+    "tv": "Chương trình TV",
+    "people": "Người",
+    "noResults": "Không tìm thấy kết quả"
   }
 }

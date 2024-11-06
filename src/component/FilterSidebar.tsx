@@ -13,18 +13,6 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: 
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [languages, setLanguages] = useState<Language[]>([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      const genresResponse = await fetchData("movie_genres");
-      const languagesResponse = await fetchData("languages");
-
-      setGenres(genresResponse.data);
-      setLanguages(languagesResponse.data);
-    };
-
-    getData();
-  }, []);
-
   const handleGenreChange = (genreId: number) => {
     setFilters((prevFilters) => {
       const updatedGenres = prevFilters.selectedGenres.includes(genreId)
@@ -54,6 +42,18 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: 
       return { ...prevFilters, voteAverageRange: newVoteAverageRange };
     });
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const genresResponse = await fetchData("movie_genres");
+      const languagesResponse = await fetchData("languages");
+
+      setGenres(genresResponse.data);
+      setLanguages(languagesResponse.data);
+    };
+
+    getData();
+  }, []);
 
   useEffect(() => {
     setFilters(initialFilters);

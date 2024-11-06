@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { AvatarMenuProps } from "../movie.type";
+import useToggleVisibility from "../utils/useToggleVisibility";
 
 const AvatarMenu: React.FC<AvatarMenuProps> = ({ userInfo, handleLogout }) => {
   const { t } = useTranslation();
-
-  const [isAvatarMenuOpen, setIsAvatarMenuOpen] = useState(false);
-  const toggleAvatarMenu = () => setIsAvatarMenuOpen((prev) => !prev);
+  const { isOpen, toggle, elementRef } = useToggleVisibility();
 
   return (
-    <div className="relative">
+    <div className="relative" ref={elementRef}>
       <button
         className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center cursor-pointer"
-        onClick={toggleAvatarMenu}
+        onClick={toggle}
       >
         {userInfo.username.charAt(0).toUpperCase()}
       </button>
       <div
         className={`absolute left-1/2 transform -translate-x-1/2 mt-3 w-48 bg-white rounded shadow-lg transition-all duration-300 origin-top 
-          ${isAvatarMenuOpen ? "scale-y-100 opacity-100" : "opacity-0 scale-y-0"}
+          ${isOpen ? "scale-y-100 opacity-100" : "opacity-0 scale-y-0"}
         `}
       >
         <div className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 origin-top w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-white"></div>

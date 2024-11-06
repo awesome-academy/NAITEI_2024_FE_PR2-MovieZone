@@ -89,5 +89,15 @@
     "voteAverageAsc": "Rating (Ascending)",
     "releaseDateDesc": "Release Date (Newest First)",
     "releaseDateAsc": "Release Date (Oldest First)"
+  },
+  "popularPeoplePage": {
+    "popularPeople": "Popular People"
+  },
+  "searchPage": {
+    "searchResults": "Search Results",
+    "movie": "Movies",
+    "tv": "TV Shows",
+    "people": "People",
+    "noResults": "No results found"
   }
 }
