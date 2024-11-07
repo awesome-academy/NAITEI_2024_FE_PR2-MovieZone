@@ -11,7 +11,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 
   return (
     <div className={`relative p-2 ${style === "horizontal" ? "md:min-w-[305px] min-w-[230px]" : "md:min-w-[240px] min-w-[180px] mb-3"}`}>
-      <Link to={`/${movie.title ? "movie" : "tv"}/${movie.id}`} className="block">
+      <Link to={`/${movie.title ? "movie" : "tv"}/${movie.id}`}>
         <img
           src={style === "horizontal" 
             ? require(`../assets/image/${movie.title ? "movie" : "tv"}/backdrop${movie.backdrop_path}`) 

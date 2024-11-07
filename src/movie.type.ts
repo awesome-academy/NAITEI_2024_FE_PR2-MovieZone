@@ -1,3 +1,5 @@
+import React, { ReactNode } from 'react';
+
 export interface DropdownProps {
   label: string;
   items: { label: string; link?: string; onClick?: () => void }[];
@@ -6,6 +8,28 @@ export interface DropdownProps {
 
 export interface LanguageSwitcherProps {
   isMobile?: boolean;
+}
+
+export interface Review {
+  author: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string;
+    rating: number;
+  };
+  content: string;
+  created_at: string;
+  updated_at: string;
+  id: string;
+  url: string;
+}
+
+export interface Participants {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string;
 }
 
 export interface Movie {
@@ -25,6 +49,29 @@ export interface Movie {
   original_name?: string;
   first_air_date?: string;
   name?: string;
+  keywords?: { id: number; name: string }[];
+  reviews?: Review[];
+  recommendations?: {
+    id: number;
+    title: string;
+    original_title: string;
+    poster_path: string;
+    backdrop_path: string;
+    overview: string;
+    media_type: string;
+    adult: boolean;
+    original_language: string;
+    genre_ids: number[];
+    popularity: number;
+    release_date: string;
+    vote_average: number;
+    vote_count: number;
+  }[];
+  medialink?: { [key: string]: string };
+  status?: string;
+  budget?: number;
+  revenue?: number;
+  participants?: Participants[];
 }
 
 export interface HeroSliderProps {
@@ -33,8 +80,9 @@ export interface HeroSliderProps {
 
 export interface MovieCarouselProps {
   title: string;
-  movies: Movie[];
+  data: Movie[] | Movie['participants'];
   style?: "vertical" | "horizontal";
+  type?: "movie" | "participant"
 }
 
 export interface LeaderboardProps {
@@ -176,4 +224,15 @@ export interface Person {
 
 export interface PeopleCardProps {
   person: Person;
+}
+
+export interface TooltipProps {
+  text: string;
+  children: ReactNode;
+  width?: string;
+  translateX?: string;
+}
+
+export interface MovieReviewsProps {
+  reviews: Review[];
 }

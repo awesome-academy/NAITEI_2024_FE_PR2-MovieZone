@@ -24,7 +24,6 @@ const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
         </button>
         <div className="flex">
           <img
-            // src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             src={require(`../assets/image/movie/poster${movie.poster_path}`)}
             alt={movie.title}
             className="w-1/3 object-cover"
@@ -32,7 +31,7 @@ const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
           <div className="p-4 w-2/3">
             <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
             <p className="text-gray-400 mb-2">{movie.release_date}</p>
-            <Tooltip text={movie.overview}>
+            <Tooltip text={movie.overview} width={'md:w-[350px] w-[200px]'}>
               <p className="text-gray-200 md:text-sm text-xs line-clamp-4">{movie.overview}</p>
             </Tooltip>
             <div className="mt-4 flex items-center">
@@ -40,7 +39,7 @@ const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
             </div>
             <Link to={`/movie/${movie.id}`}>
               <button className="mt-4 inline-block bg-primary text-white rounded px-4 py-2 hover:bg-red-800 transition">
-                {t('viewDetails')}
+                {t('home.viewDetails')}
               </button>
             </Link>
             <div className="absolute top-2 left-2">

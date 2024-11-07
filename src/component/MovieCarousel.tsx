@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Movie, MovieCarouselProps } from "../movie.type";
+import { Link } from "react-router-dom";
+import { Movie, Participants, MovieCarouselProps } from "../movie.type";
 import MovieCard from "./MovieCard";
 
-const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "vertical" }) => {
-  const [activeMovie, setActiveMovie] = useState<Movie | null>(null);
+const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, data, style = "vertical", type="movie" }) => {
+  const [activeMovie, setActiveMovie] = useState<Movie |  Participants | null>(null);
   const [showLeftGradient, setShowLeftGradient] = useState(false);
   const [showRightGradient, setShowRightGradient] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const backgroundImage =
-    style === "horizontal" && activeMovie
-      ? require(`../assets/image/movie/backdrop${activeMovie.backdrop_path}`)
+    style === "horizontal" && activeMovie &&  type === "movie"
+      ? require(`../assets/image/movie/backdrop${(activeMovie  as Movie).backdrop_path}`)
       : undefined;
 
   const handleScroll = () => {
@@ -22,10 +23,17 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
   };
 
   useEffect(() => {
-    if (movies.length > 0) {
-      setActiveMovie(movies[0]);
+    if (data && data.length > 0) {
+      setActiveMovie(data[0]);
     }
-  }, [movies]);
+
+    if (carouselRef.current) {
+      const { scrollWidth, clientWidth } = carouselRef.current;
+      const hasScrollableContent = scrollWidth > clientWidth;
+      setShowLeftGradient(false);
+      setShowRightGradient(hasScrollableContent);
+    }
+  }, [data]);
 
   return (
     <div className="my-8 container max-w-screen-xl mx-auto p-4">
@@ -43,14 +51,41 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ title, movies, style = "v
           ref={carouselRef}
           onScroll={handleScroll}
         >
-          {movies.map((movie) => (
-            <MovieCard 
-              key={movie.id}
-              movie={movie}
-              style={style}
-              onMouseEnter={setActiveMovie}
-            />
-          ))}
+          {data?.map((item, index) => {
+            if (type === "movie") {
+              return (
+                <MovieCard
+                  key={index}
+                  movie={item as Movie}
+                  style={style}
+                  onMouseEnter={() => setActiveMovie(item)}
+                />
+              );
+            } else if (type === "participant") {
+              const participant = item as Participants;
+              return (
+                <div
+                  key={index}
+                  className="relative cursor-pointer hover:scale-105 duration-200 min-w-[150px]"
+                >
+                  <div className="overflow-hidden rounded-md">
+                    <Link to={`/person/${item.id}`}>
+                      <img
+                        src={require(`../assets/image/people/profile${participant.profile_path}`)}
+                        alt={participant.name}
+                        className="w-full h-60 object-cover"
+                      />
+                    </Link>
+                  </div>
+                  <div className="mt-2">
+                    <p className="font-semibold">{participant.name}</p>
+                    <p className="text-sm text-gray-500">{participant.character}</p>
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })}
         </div>
 
         {showLeftGradient && (

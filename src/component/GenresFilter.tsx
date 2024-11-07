@@ -5,7 +5,7 @@ const GenresFilter: React.FC<GenresFilterProps> = ({ genres, selectedGenres, onG
   return (
     <ul className="flex flex-wrap">
       {genres.map((genre) => (
-        <li key={genre.id} className="mb-2 w-1/2">
+        <li key={genre.id} className="mb-2 w-1/2 flex items-center">
           <label className="flex items-center space-x-2 cursor-pointer">
             <input
               type="checkbox"
@@ -14,7 +14,7 @@ const GenresFilter: React.FC<GenresFilterProps> = ({ genres, selectedGenres, onG
               className="hidden"
             />
             <span
-              className={`relative w-5 h-5 border-2 rounded-md transition-colors duration-200 ${
+              className={`relative w-5 h-5 flex-shrink-0 border-2 rounded-md transition-colors duration-200 ${
                 selectedGenres.includes(genre.id) ? "bg-primary border-transparent" : "bg-transparent border-gray-400"
               }`}
             >
