@@ -7,6 +7,7 @@ import AuthPage from './page/AuthPage';
 import MoviePage from './page/MoviePage';
 import PopulerPeoplePage from './page/PopulerPeoplePage';
 import SearchPage from './page/SearchPage';
+import MovieDetail from './page/MovieDetail';
 import { useAlert, AlertProvider } from "./context/AlertContext";
 import Alert from "./component/Alert";
 
@@ -31,8 +32,11 @@ const MainLayout: React.FC = () => {
           <Route path="/register" element={<AuthPage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/movies" element={<MoviePage />} />
+          <Route path="/tv" element={<MoviePage />} />
           <Route path="/person" element={<PopulerPeoplePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
+          <Route path="/tv/:id" element={<MovieDetail />} />
         </Routes>
       </main>
       {!hideHeaderFooter && <Footer />}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { fetchData } from "../services/fetchData";
 import GenresFilter from "./GenresFilter";
 import ReleaseDateFilter from "./ReleaseDateFilter";
@@ -9,6 +10,8 @@ import { Genre, Language, FilterSidebarProps, Filters } from "../movie.type";
 
 const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: initialFilters }) => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const isMoviePage = location.pathname.startsWith("/movie");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -45,7 +48,8 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: 
 
   useEffect(() => {
     const getData = async () => {
-      const genresResponse = await fetchData("movie_genres");
+      const endpointGenres = isMoviePage ? "movie_genres" : "tv_genres";
+      const genresResponse = await fetchData(endpointGenres);
       const languagesResponse = await fetchData("languages");
 
       setGenres(genresResponse.data);

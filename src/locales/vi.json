@@ -71,6 +71,7 @@
   },
   "moviePage": {
     "movies": "Phim",
+    "tvShows": "Chương trình TV",
     "genres": "Thể loại",
     "releaseDate": "Ngày phát hành",
     "rating": "Đánh giá",
@@ -88,7 +89,8 @@
     "voteAverageDesc": "Điểm đánh giá (Giảm dần)",
     "voteAverageAsc": "Điểm đánh giá (Tăng dần)",
     "releaseDateDesc": "Ngày phát hành (Mới nhất)",
-    "releaseDateAsc": "Ngày phát hành (Cũ nhất)"
+    "releaseDateAsc": "Ngày phát hành (Cũ nhất)",
+    "noResultsFound": "Không có kết quả tìm thấy"
   },
   "popularPeoplePage": {
     "popularPeople": "Người nổi tiếng"
@@ -99,5 +101,22 @@
     "tv": "Chương trình TV",
     "people": "Người",
     "noResults": "Không tìm thấy kết quả"
+  },
+  "MovieDetailPage": {
+    "notFound": "Không tìm thấy",
+    "userScore": "Điểm",
+    "overview": "Tổng quan",
+    "addList": "Thêm vào danh sách",
+    "favorite": "Yêu thích",
+    "watchList": "Danh sách theo dõi",
+    "recommendations": "Đề xuất",
+    "keywords": "Từ khóa",
+    "reviews": "Đánh giá",
+    "status": "Trạng thái",
+    "budget": "Ngân sách",
+    "revenue": "Doanh thu",
+    "participants": "Người tham gia",
+    "showLess": "Ẩn bớt",
+    "showMore": "Xem thêm"
   }
 }

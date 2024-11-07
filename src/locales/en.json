@@ -71,6 +71,7 @@
   },
   "moviePage": {
     "movies": "Movies",
+    "tvShows": "TV Shows",
     "genres": "Genres",
     "releaseDate": "Release Date",
     "rating": "Rating",
@@ -88,7 +89,8 @@
     "voteAverageDesc": "Rating (Descending)",
     "voteAverageAsc": "Rating (Ascending)",
     "releaseDateDesc": "Release Date (Newest First)",
-    "releaseDateAsc": "Release Date (Oldest First)"
+    "releaseDateAsc": "Release Date (Oldest First)",
+    "noResultsFound": "No results found"
   },
   "popularPeoplePage": {
     "popularPeople": "Popular People"
@@ -99,5 +101,22 @@
     "tv": "TV Shows",
     "people": "People",
     "noResults": "No results found"
+  },
+  "MovieDetailPage": {
+    "notFound": "No Found",
+    "userScore": "User Score",
+    "overview": "Overview",
+    "addList": "Add to list",
+    "favorite": "Mark as favorite",
+    "watchList": "Add to watchList",
+    "recommendations": "Recommendations",
+    "keywords": "Keywords",
+    "reviews": "Reviews",
+    "status": "Status",
+    "budget": "Budget",
+    "revenue": "Revenue",
+    "participants": "Participants",
+    "showLess": "Show less reviews",
+    "showMore": "Show more reviews"
   }
 }

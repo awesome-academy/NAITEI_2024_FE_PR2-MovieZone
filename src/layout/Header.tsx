@@ -7,7 +7,8 @@ import LanguageSwitcher from "../component/LanguageSwitcher";
 import AvatarMenu from "../component/AvatarMenu";
 import { ReactComponent as MenuIcon } from "../assets/icon/menu.svg";
 import { ReactComponent as SearchIcon } from "../assets/icon/search.svg";
-import { ReactComponent as CloseIcon } from "../assets/icon/close.svg";
+import { ReactComponent as CloseIcon , ReactComponent as TestClear } from "../assets/icon/close.svg";
+
 import { UserInfo } from "../movie.type";
 import { getUserInfo } from "../utils/storageHelpers";
 import { useAlert } from '../context/AlertContext';
@@ -187,7 +188,7 @@ const Header: React.FC = () => {
             />
             {searchTerm && (
               <button onClick={handleClear} className="absolute right-4 text-black">
-                <CloseIcon className="h-5 w-5 fill-black" />
+                <TestClear className="h-5 w-5 fill-black" />
               </button>
             )}
           </div>

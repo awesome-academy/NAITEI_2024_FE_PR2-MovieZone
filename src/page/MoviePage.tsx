@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { Movie, Filters } from "../movie.type";
 import { fetchData } from "../services/fetchData";
 import MovieCard from "../component/MovieCard";
@@ -13,6 +14,8 @@ import { ReactComponent as Filter } from "../assets/icon/filter.svg";
 
 const MoviePage: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const isMoviePage = location.pathname.startsWith("/movie");
   const urlParams = new URLSearchParams(window.location.search);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filters, setFilters] = useState<Filters>({
@@ -55,7 +58,9 @@ const MoviePage: React.FC = () => {
     if (limit) newUrlParams.set('limit', limit.toString());
     if (page) newUrlParams.set('page', page.toString());
   
-    window.history.pushState({}, '', `${window.location.pathname}?${newUrlParams.toString()}`);
+    if (window.location.search !== `?${newUrlParams.toString()}`) {
+      window.history.pushState({}, '', `${window.location.pathname}?${newUrlParams.toString()}`);
+    }
   };
 
   const handleFilterChange = (updatedFilters: Filters) => {
@@ -129,22 +134,44 @@ const MoviePage: React.FC = () => {
   ];
 
   useEffect(() => {
-    if (applyFilter) {
-      const fetchMovies = async () => {
-        const queryParams = buildQueryParams();
-        const response = await fetchData("movie", queryParams);
-        setMovies(response.data);
-        setTotalPages(Math.ceil(response.totalCount / cardsPerPage));
-        setApplyFilter(false);
-      };
-
+    const fetchMovies = async () => {
+      const queryParams = buildQueryParams();
+      const endpoint = isMoviePage ? "movie" : "tv";
+      const response = await fetchData(endpoint, queryParams);
+      setMovies(response.data);
+      setTotalPages(Math.ceil(response.totalCount / cardsPerPage));
+      setApplyFilter(false);
+    };
+  
+    if (debouncedApplyFilter) {
+      updateUrlParams(filters, cardsPerPage, currentPage, sortBy);
       fetchMovies();
     }
-  }, [debouncedApplyFilter]);
+  }, [debouncedApplyFilter, filters, cardsPerPage, currentPage, sortBy]);
 
   useEffect(() => {
-    updateUrlParams(filters, cardsPerPage, currentPage, sortBy);
-  }, [filters, cardsPerPage, currentPage, sortBy]);
+    const handlePopState = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      setFilters({
+        selectedGenres: urlParams.getAll('genre').map(genre => Number(genre)),
+        releaseDateRange: [
+          urlParams.get('dateFrom') || "",
+          urlParams.get('dateto') || ""
+        ],
+        voteAverageRange: [
+          Number(urlParams.get('ratingMin')) || 0,
+          Number(urlParams.get('ratingMax')) || 10
+        ],
+        originalLanguage: urlParams.get('lang') || "",
+      });
+      setCurrentPage(Number(urlParams.get('page')) || 1);
+      setCardsPerPage(Number(urlParams.get('limit')) || 12);
+      setSortBy(urlParams.get('sort') && urlParams.get('order') ? `${urlParams.get('sort')}.${urlParams.get('order')}` : null);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     if (isFilterVisible) {
@@ -158,7 +185,7 @@ const MoviePage: React.FC = () => {
     <div className="text-white my-16 container max-w-screen-xl mx-auto">
       <div className="flex flex-col md:flex-row md:space-x-4 md:items-start">
         <div className="w-1/4 text-3xl mb-5 font-bold justify-between md:flex hidden">
-          <span>{t('moviePage.movies')}</span>
+          <span>{isMoviePage ? t('moviePage.movies') : t('moviePage.tvShows')}</span>
           <button
             className="ml-4 px-2 py-1"
             onClick={handleResetFilters}
