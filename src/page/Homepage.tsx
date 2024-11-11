@@ -5,6 +5,7 @@ import MovieCarousel from "../component/MovieCarousel";
 import Leaderboard from "../component/Leaderboard";
 import { Movie } from "../movie.type";
 import { fetchData } from "../services/fetchData";
+import { useUser } from '../context/UserContext';
 
 const Homepage: React.FC = () => {
   const { t } = useTranslation();
@@ -16,6 +17,31 @@ const Homepage: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [recentIdMovies, setRecentIdMovies] = useState<string[]>([]);
+  const [recentMovies, setRecentMovies] = useState<Movie[]>([]);
+  const { userInfo } = useUser();
+
+  useEffect(() => {
+    if (userInfo) {
+      const storedRecentIdMovies = JSON.parse(localStorage.getItem(`recentMovies_${userInfo.id}`) || '[]');
+      setRecentIdMovies(storedRecentIdMovies);
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (recentIdMovies.length > 0) {
+      const movieIdsParam = recentIdMovies.map((id) => `id=${id}`).join('&');
+      const getMoviesByIds = async () => {
+        const response = await fetchData("movie",`${movieIdsParam}`);
+        const orderedMovies: Movie[] = recentIdMovies.map((id: string) => 
+          response.data.find((movie: Movie) => movie.id === Number(id))
+        );
+        setRecentMovies(orderedMovies);
+      };
+
+      getMoviesByIds();
+    }
+  }, [recentIdMovies, setRecentMovies]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -66,6 +92,9 @@ const Homepage: React.FC = () => {
       <MovieCarousel title={t('home.trending')} data={trendingMovies} />
       <MovieCarousel title={t('home.recentlyReleased')} data={recentlyReleased} style="horizontal"/>
       <MovieCarousel title={t('home.topRated')} data={topRatedMovies} />
+      {recentMovies.length > 0 && 
+        <MovieCarousel title={t('home.recentlyMovie')} data={recentMovies} style="horizontal" />
+      }
       <Leaderboard
         movies={leaderboardMovies}
         onSort={handleSort}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { fetchData } from "../services/fetchData";
@@ -15,6 +15,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [languages, setLanguages] = useState<Language[]>([]);
+  const hasFetchedData = useRef(false);
 
   const handleGenreChange = (genreId: number) => {
     setFilters((prevFilters) => {
@@ -48,6 +49,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, filters: 
 
   useEffect(() => {
     const getData = async () => {
+      if (hasFetchedData.current) return;
+      hasFetchedData.current = true;
+      
       const endpointGenres = isMoviePage ? "movie_genres" : "tv_genres";
       const genresResponse = await fetchData(endpointGenres);
       const languagesResponse = await fetchData("languages");

@@ -8,20 +8,19 @@ import AvatarMenu from "../component/AvatarMenu";
 import { ReactComponent as MenuIcon } from "../assets/icon/menu.svg";
 import { ReactComponent as SearchIcon } from "../assets/icon/search.svg";
 import { ReactComponent as CloseIcon , ReactComponent as TestClear } from "../assets/icon/close.svg";
-
-import { UserInfo } from "../movie.type";
 import { getUserInfo } from "../utils/storageHelpers";
 import { useAlert } from '../context/AlertContext';
 import useToggleVisibility from "../utils/useToggleVisibility";
+import { useUser } from '../context/UserContext';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { setAlert } = useAlert();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<UserInfo  | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const { isOpen, toggle, elementRef } = useToggleVisibility();
+  const { userInfo, setUserInfo } = useUser();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -34,8 +33,8 @@ const Header: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   useEffect(() => {
-    const userData = getUserInfo();
-    setUserInfo(userData);
+    const storedUserData = getUserInfo();
+    setUserInfo(storedUserData);
   }, []);
 
   const handleLogout = () => {
@@ -64,6 +63,14 @@ const Header: React.FC = () => {
     { label: t('header.onTV'), link: "/tv/on-tv" },
     { label: t('header.topRated'), link: "/tv/top-rated" },
   ];
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMenuOpen]);
 
   return (
     <header className="bg-dark text-white sticky top-0 z-50 font-semibold">

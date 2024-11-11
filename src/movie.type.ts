@@ -109,7 +109,7 @@ export interface MovieModalProps {
 
 export interface MovieCardProps {
   movie: Movie;
-  style?: "vertical" | "horizontal";
+  style?: "vertical" | "horizontal" | "flex";
   onMouseEnter?: (movie: Movie) => void;
 }
 
@@ -117,6 +117,8 @@ export interface MovieMenuProps {
   isOpen: boolean;
   toggleMenu: () => void;
   position?: "right" | "left";
+  movieId: number;
+  type: "movie" | "tv";
 }
 
 export interface UserInfo {
@@ -213,13 +215,9 @@ export interface Person {
   name: string;
   profile_path: string;
   popularity: number;
-  known_for: Array<{
-    id: number;
-    title: string;
-    name: string;
-    media_type: "movie" | "tv";
-    poster_path: string;
-  }>;
+  known_for_department: string;
+  gender: number;
+  known_for: Movie[];
 }
 
 export interface PeopleCardProps {
@@ -235,4 +233,11 @@ export interface TooltipProps {
 
 export interface MovieReviewsProps {
   reviews: Review[];
+}
+
+export interface UserLists {
+  addToList: { [listName: string]: number[] };
+  favorite: number[];
+  watchlist: number[];
+  rating: { [movieId: number]: number };
 }

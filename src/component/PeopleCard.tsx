@@ -19,7 +19,7 @@ const PeopleCard: React.FC<PeopleCardProps> = ({ person }) => {
             {person.known_for.map((item, index) => (
               <span key={item.id}>
                 <Link
-                  to={`/${item.media_type}/${item.id}`}
+                  to={`/${item.title ? "movie" : "tv"}/${item.id}`}
                   className="hover:underline"
                 >
                   {item.title || item.name}

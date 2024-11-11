@@ -15,7 +15,8 @@
     "onTV": "Trên TV",
     "discuss": "Thảo luận",
     "list": "Danh sách",
-    "watchlist": "Danh sách xem",
+    "watchlist": "Danh sách theo dõi",
+    "favorite": "Yêu thích",
     "rating2": "Đánh giá",
     "viewProfile": "Xem hồ sơ",
     "logout": "Đăng xuất",
@@ -49,7 +50,25 @@
     "favorite": "Yêu thích",
     "watchlist": "Danh sách xem",
     "rating2": "Đánh giá",
-    "viewDetails": "Xem chi tiết"
+    "viewDetails": "Xem chi tiết",
+    "createNewList": "Tạo danh sách",
+    "selectList": "Chọn danh sách",
+    "loginAlert": "Bạn cần đăng nhập trước!",
+    "ratingAlert": "Đã thêm đánh giá!",
+    "removeRatingAlert": "Đã xóa đánh giá!",
+    "addToListAlert": "Đã thêm vào danh sách!",
+    "createListAlert": "Đã tạo danh sách!",
+    "removeListAlert": "Đã xóa khỏi danh sách!",
+    "favoriteAlert": "Bạn thêm vào yêu thích!",
+    "removeFavoriteAlert": "Đã xóa khỏi yêu thích!",
+    "watchlistAlert": "Đã thêm vào danh sách theo dõi!",
+    "removeWatchlistAlert": "Đã xóa khỏi danh sách theo dõi!",
+    "listExistsAlert": "Đã tồn tại danh sách này",
+    "movieNotInAnyListAlert": "Chưa tồn tại trong danh sách để xóa",
+    "movieNotRatingAlert": "Chưa tồn tại đánh giá để xóa",
+    "removeListNameAlert": "Đã xóa danh sách!",
+    "listNotFoundAlert": "Không tìm thấy danh sách này!",
+    "recentlyMovie": "Phim gần đây"
   },
   "authPage" : {
     "login": "Đăng nhập",
@@ -90,6 +109,8 @@
     "voteAverageAsc": "Điểm đánh giá (Tăng dần)",
     "releaseDateDesc": "Ngày phát hành (Mới nhất)",
     "releaseDateAsc": "Ngày phát hành (Cũ nhất)",
+    "firstAirDateDesc": "Ngày phát sóng (Mới nhất)",
+    "firstAirDateAsc": "Ngày phát sóng (Cũ nhất)",
     "noResultsFound": "Không có kết quả tìm thấy"
   },
   "popularPeoplePage": {
@@ -100,7 +121,8 @@
     "movie": "Phim",
     "tv": "Chương trình TV",
     "people": "Người",
-    "noResults": "Không tìm thấy kết quả"
+    "noResults": "Không tìm thấy kết quả",
+    "searchKey": "Từ khóa"
   },
   "MovieDetailPage": {
     "notFound": "Không tìm thấy",
@@ -118,5 +140,32 @@
     "participants": "Người tham gia",
     "showLess": "Ẩn bớt",
     "showMore": "Xem thêm"
+  },
+  "AccountPage": {
+    "noFound": "Chưa có tương tác nào",
+    "favorite": "Yêu thích",
+    "list": "Danh sách",
+    "rating": "Đánh giá",
+    "watchlist": "Danh sách theo dõi",
+    "movie": "Phim",
+    "tvShow": "Chương trình TV",
+    "overview": "Tổng quan",
+    "totalRatings": "Tổng đánh giá",
+    "totalList": "Tổng số danh sách",
+    "totalFavorite": "Tổng số yêu thích",
+    "totalWatchlist": "Tổng danh sách theo dõi",
+    "stats": "Thống kê"
+  },
+  "PersonDetailPage": {
+    "noFound": "Không tìm thấy người này",
+    "female": "Nữ",
+    "male": "Nam",
+    "knownFor": "Biết đến",
+    "gender": "Giới tính",
+    "info": "Thông tin cá nhân",
+    "deletedAlert": "Đã xóa tài khoản thành công",
+    "updatedAlert": "Tài khoản được cập nhật thành công",
+    "deleteAccount": "Xóa tài khoản",
+    "deletededAlert": "Xóa tài khoản thành công"
   }
 }

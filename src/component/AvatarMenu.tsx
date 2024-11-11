@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { AvatarMenuProps } from "../movie.type";
 import useToggleVisibility from "../utils/useToggleVisibility";
+import { Link } from "react-router-dom";
 
 const AvatarMenu: React.FC<AvatarMenuProps> = ({ userInfo, handleLogout }) => {
   const { t } = useTranslation();
@@ -21,35 +22,38 @@ const AvatarMenu: React.FC<AvatarMenuProps> = ({ userInfo, handleLogout }) => {
         `}
       >
         <div className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 origin-top w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-white"></div>
-        <a href="/account" className="block px-4 py-2 text-dark">
-          <p>{userInfo.username}</p>
-          <p className="text-xs text-gray-600">{t("header.viewProfile")}</p>
-        </a>
+        <Link to={"/account"}>
+          <div className="block px-4 py-2 text-dark">
+            <p>{userInfo.username}</p>
+            <p className="text-xs text-gray-600">{t("header.viewProfile")}</p>
+          </div>
+        </Link>
         <hr />
-        <a
-          href="/account/watchlist"
-          className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
-        >
-          {t("header.discuss")}
-        </a>
-        <a
-          href="/account/watchlist"
-          className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
-        >
-          {t("header.list")}
-        </a>
-        <a
-          href="/account/ratings"
-          className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
-        >
-          {t("header.rating2")}
-        </a>
-        <a
-          href="/account/watchlist"
-          className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary"
-        >
-          {t("header.watchlist")}
-        </a>
+        <Link to={"/account/discuss"}>
+          <div className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary">
+            {t("header.discuss")}
+          </div>
+        </Link>
+        <Link to={"/account/favorite"}>
+          <div className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary">
+            {t("header.favorite")}
+          </div>
+        </Link>
+        <Link to={"/account/list"}>
+          <div className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary">
+            {t("header.list")}
+          </div>
+        </Link>
+        <Link to={"/account/rating"}>
+          <div className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary">
+            {t("header.rating2")}
+          </div>
+        </Link>
+        <Link to={"/account/watchlist"}>
+          <div className="block px-4 py-2 text-sm text-gray-600 hover:text-white hover:bg-primary">
+            {t("header.watchlist")}
+          </div>
+        </Link>
         <hr />
         <button
           onClick={handleLogout}
