@@ -43,7 +43,7 @@ const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
               </button>
             </Link>
             <div className="absolute top-2 left-2">
-              <MovieMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} position="left" />
+              <MovieMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} position="left" movieId={movie.id} type={movie.title ? "movie" : "tv"} />
             </div>
           </div>
         </div>

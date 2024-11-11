@@ -35,7 +35,7 @@ const MovieReviews: React.FC<MovieReviewsProps> = ({ reviews }) => {
               </div>
             </div>
           </div>
-          <Tooltip text={reviews[0].content} width="md:w-[700px] w-[300px]" translateX="md:translate-x-[150px] translate-x-[50px]">
+          <Tooltip text={reviews[0].content} width="md:w-[700px] w-[300px]">
             <p className="text-sm whitespace-pre-line line-clamp-6">{reviews[0].content}</p>
           </Tooltip>
         </div>
@@ -61,7 +61,7 @@ const MovieReviews: React.FC<MovieReviewsProps> = ({ reviews }) => {
               </div>
             </div>
           </div>
-          <Tooltip text={review.content} width="md:w-[700px] w-[300px]" translateX="md:translate-x-[150px] translate-x-[50px]">
+          <Tooltip text={review.content} width="md:w-[700px] w-[300px]">
             <p className="text-sm whitespace-pre-line line-clamp-6">{review.content}</p>
           </Tooltip>
         </div>

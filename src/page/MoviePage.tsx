@@ -16,6 +16,8 @@ const MoviePage: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const isMoviePage = location.pathname.startsWith("/movie");
+  const isTVPage = location.pathname.startsWith("/tv");
+  const dateField = isMoviePage ? "release_date" : "first_air_date"
   const urlParams = new URLSearchParams(window.location.search);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filters, setFilters] = useState<Filters>({
@@ -101,11 +103,11 @@ const MoviePage: React.FC = () => {
 
   const buildQueryParams = () => {
     const { selectedGenres, releaseDateRange, voteAverageRange, originalLanguage } = filters;
-
+    
     const queryParts = [
       selectedGenres.length > 0 && selectedGenres.map((genre) => `genre_ids_like=${genre}`).join('&'),
-      releaseDateRange[0] !== "" && `release_date_gte=${releaseDateRange[0]}`,
-      releaseDateRange[1] !== "" && `release_date_lte=${releaseDateRange[1]}`,
+      releaseDateRange[0] !== "" && `${dateField}_gte=${releaseDateRange[0]}`,
+      releaseDateRange[1] !== "" && `${dateField}_lte=${releaseDateRange[1]}`,
       voteAverageRange && `vote_average_gte=${voteAverageRange[0]}&vote_average_lte=${voteAverageRange[1]}`,
       originalLanguage && `original_language=${originalLanguage}`,
       sortBy && `_sort=${sortBy.split('.')[0]}&_order=${sortBy.split('.')[1]}`,
@@ -129,8 +131,15 @@ const MoviePage: React.FC = () => {
     { value: "popularity.asc", label: t('moviePage.popularityAsc') },
     { value: "vote_average.desc", label: t('moviePage.voteAverageDesc') },
     { value: "vote_average.asc", label: t('moviePage.voteAverageAsc') },
-    { value: "release_date.desc", label: t('moviePage.releaseDateDesc') },
-    { value: "release_date.asc", label: t('moviePage.releaseDateAsc') },
+    ...(isMoviePage
+      ? [
+          { value: "release_date.desc", label: t('moviePage.releaseDateDesc') },
+          { value: "release_date.asc", label: t('moviePage.releaseDateAsc') },
+        ]
+      : [
+          { value: "first_air_date.desc", label: t('moviePage.firstAirDateDesc') },
+          { value: "first_air_date.asc", label: t('moviePage.firstAirDateAsc') },
+        ]),
   ];
 
   useEffect(() => {
@@ -138,6 +147,7 @@ const MoviePage: React.FC = () => {
       const queryParams = buildQueryParams();
       const endpoint = isMoviePage ? "movie" : "tv";
       const response = await fetchData(endpoint, queryParams);
+
       setMovies(response.data);
       setTotalPages(Math.ceil(response.totalCount / cardsPerPage));
       setApplyFilter(false);
@@ -170,6 +180,7 @@ const MoviePage: React.FC = () => {
     };
 
     window.addEventListener('popstate', handlePopState);
+    
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
@@ -180,6 +191,63 @@ const MoviePage: React.FC = () => {
       document.body.style.overflow = 'auto';
     }
   }, [isFilterVisible]);
+
+  useEffect(() => {
+    const getTodayDate = () => {
+      const today = new Date();
+      return today.toISOString().split('T')[0]; 
+    };
+
+    setSortBy("popularity.desc");
+    if (location.pathname.includes('/top-rated')) {
+      setSortBy("vote_average.desc");
+    }
+    
+    if (isMoviePage && location.pathname.includes('/now-playing')) {
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        releaseDateRange: [getTodayDate(), ""]
+      }));
+      setSortBy(null);
+    }
+
+    if (isMoviePage && location.pathname.includes('/upcoming')) {
+      const today = new Date();
+      today.setDate(today.getDate() + 1);
+      const nextDay = today.toISOString().split('T')[0];
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        releaseDateRange: [nextDay, ""]
+      }));
+      setSortBy(null);
+    }
+
+    if (isTVPage && location.pathname.includes('/airing-today')) {
+      const today = getTodayDate();
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        releaseDateRange: [today, today]
+      }));
+      setSortBy(null);
+    }
+
+    if (isTVPage && location.pathname.includes('/on-tv')) {
+      const today = new Date();
+      const nextWeek = new Date(today);
+      nextWeek.setDate(today.getDate() + 7);
+      const todayFormatted = today.toISOString().split('T')[0];
+      const nextWeekFormatted = nextWeek.toISOString().split('T')[0];
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        releaseDateRange: [todayFormatted, nextWeekFormatted]
+      }));
+      setSortBy(null);
+    }
+
+    if (isTVPage && location.pathname.includes('/top-rated')) {
+      setSortBy("vote_average.desc");
+    }
+  }, []);
 
   return (
     <div className="text-white my-16 container max-w-screen-xl mx-auto">

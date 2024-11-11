@@ -74,45 +74,50 @@ const SearchPage: React.FC = () => {
   }, [activeTab, currentPage]);
 
   return (
-    <div className="container max-w-screen-xl mx-auto p-4 py-8 flex md:flex-row flex-col items-start">
-      <div className="flex flex-col md:w-1/4 w-full bg-dark rounded-md">
-        <div className="text-xl font-bold py-3 text-white bg-primary rounded-t-md">
-          <span className="p-4">{t('searchPage.searchResults')}</span>
-        </div>
-        {tabs.map((tab) => (
-          <div 
-            key={tab.name}
-            className={`p-4 cursor-pointer ${activeTab === tab.name ? 'bg-gray-400 text-charcoal font-bold' : 'text-white'}`} 
-            onClick={() => handleTabChange(tab.name as 'movie' | 'tv' | 'people')}
-          >
-            {tab.label} ({tab.count})
-          </div>
-        ))}
+    <div className="container max-w-screen-xl mx-auto p-4 py-8">
+      <div className="mb-3">
+        {query && (<span className="text-3xl p-2 text-white">{t('searchPage.searchKey')}: {query}</span>)}
       </div>
-      <div className="md:w-3/4 w-full md:ml-4 md:mt-0 mt-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
-          {filteredResults.length > 0 ? (
-            filteredResults.map((item) =>
-              "overview" in item ? (
-                <MovieCard
-                  key={item.id}
-                  movie={item as Movie}
-                />
-              ) : (
-                <PeopleCard key={item.id} person={item as Person} />
-              )
-            )
-          ) : (
-            <p className="py-2 text-3xl text-white col-span-4 text-center">{t('searchPage.noResults')}</p>
-          )}
+      <div className="flex md:flex-row flex-col items-start">
+        <div className="flex flex-col md:w-1/4 w-full bg-dark rounded-md">
+          <div className="text-xl font-bold py-3 text-white bg-primary rounded-t-md">
+            <span className="p-4">{t('searchPage.searchResults')}</span>
+          </div>
+          {tabs.map((tab) => (
+            <div 
+              key={tab.name}
+              className={`p-4 cursor-pointer ${activeTab === tab.name ? 'bg-gray-400 text-charcoal font-bold' : 'text-white'}`} 
+              onClick={() => handleTabChange(tab.name as 'movie' | 'tv' | 'people')}
+            >
+              {tab.label} ({tab.count})
+            </div>
+          ))}
         </div>
-        <div className="mt-4 text-white">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-            maxPagesToShow={3}
-          />
+        <div className="md:w-3/4 w-full md:ml-4 md:mt-0 mt-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
+            {filteredResults.length > 0 ? (
+              filteredResults.map((item) =>
+                "overview" in item ? (
+                  <MovieCard
+                    key={item.id}
+                    movie={item as Movie}
+                  />
+                ) : (
+                  <PeopleCard key={item.id} person={item as Person} />
+                )
+              )
+            ) : (
+              <p className="py-2 text-3xl text-white col-span-4 text-center">{t('searchPage.noResults')}</p>
+            )}
+          </div>
+          <div className="mt-4 text-white">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              maxPagesToShow={3}
+            />
+          </div>
         </div>
       </div>
     </div>

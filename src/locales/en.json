@@ -16,6 +16,7 @@
     "discuss": "Discussion",
     "list": "List",
     "watchlist": "Watchlist",
+    "favorite": "Favorite",
     "rating2": "Rating",
     "viewProfile": "View Profile",
     "logout": "Logout",
@@ -49,7 +50,25 @@
     "favorite": "Favorite",
     "watchlist": "Watchlist",
     "rating2": "Rating",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "createNewList": "Create List",
+    "selectList": "Select List",
+    "loginAlert": "You need to log in first!",
+    "ratingAlert": "Review added!",
+    "removeRatingAlert": "Rating removed!",
+    "addToListAlert": "Added to list!",
+    "createListAlert": "List created!",
+    "removeListAlert": "List removed!",
+    "favoriteAlert": "Added to favorites!",
+    "removeFavoriteAlert": "Favorite removed!",
+    "watchlistAlert": "Added to watchlist!",
+    "removeWatchlistAlert": "Watchlist removed!",
+    "listExistsAlert": "Already exists in this list",
+    "movieNotInAnyListAlert": "Does not exist in the list to delete",
+    "movieNotRatingAlert": "Not rated to delete",
+    "removeListNameAlert": "List removed!",
+    "listNotFoundAlert": "This list was not found!",
+    "recentlyMovie": "Recently Movie"
   },
   "authPage": {
     "login": "Login",
@@ -90,6 +109,8 @@
     "voteAverageAsc": "Rating (Ascending)",
     "releaseDateDesc": "Release Date (Newest First)",
     "releaseDateAsc": "Release Date (Oldest First)",
+    "firstAirDateDesc": "First Air Date (Newest First)",
+    "firstAirDateAsc": "First Air Date (Oldest First)",
     "noResultsFound": "No results found"
   },
   "popularPeoplePage": {
@@ -100,7 +121,8 @@
     "movie": "Movies",
     "tv": "TV Shows",
     "people": "People",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "searchKey": "Search key"
   },
   "MovieDetailPage": {
     "notFound": "No Found",
@@ -108,7 +130,7 @@
     "overview": "Overview",
     "addList": "Add to list",
     "favorite": "Mark as favorite",
-    "watchList": "Add to watchList",
+    "watchList": "Add to Watchlist",
     "recommendations": "Recommendations",
     "keywords": "Keywords",
     "reviews": "Reviews",
@@ -118,5 +140,32 @@
     "participants": "Participants",
     "showLess": "Show less reviews",
     "showMore": "Show more reviews"
+  },
+  "AccountPage": {
+    "noFound": "No items found",
+    "favorite": "Favorite",
+    "list": "List",
+    "rating": "Rating",
+    "watchlist": "Watchlist",
+    "movie": "Movie",
+    "tvShow": "TV Show",
+    "overview": "Overview",
+    "totalRatings": "Total Ratings",
+    "totalList": "Total Lists",
+    "totalFavorite": "Total Favorite",
+    "totalWatchlist": "Total Watchlist",
+    "stats": "Stast"
+  },
+  "PersonDetailPage": {
+    "noFound": "No person found",
+    "female": "Female",
+    "male": "Male",
+    "knownFor": "Known for",
+    "gender": "Gender",
+    "info": "Personal Info",
+    "deletedAlert": "Account deleted successfully",
+    "updatedAlert": "Account updated successfully",
+    "deleteAccount": "Delete Account",
+    "deletededAlert": "Account deleted successfully"
   }
 }

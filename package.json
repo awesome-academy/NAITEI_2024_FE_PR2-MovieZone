@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch src/data/db.json --port 5000 -m ./node_modules/json-server-auth",
+    "server": "json-server --watch src/data/db.json --port 5000 -m ./node_modules/json-server-auth --routes src/data/routes.json",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src/ --fix"
   },

@@ -9,14 +9,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, width='w-auto', trans
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const showTooltip = () => {
-    if (targetRef.current) {
-      const rect = targetRef.current.getBoundingClientRect();
-      setTooltipPosition({ 
-        top: rect.bottom + window.scrollY + 10, 
-        left: rect.left + window.scrollX
-    });
       setVisible(true);
-    }
   };
 
   const hideTooltip = () => {
@@ -37,6 +30,20 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, width='w-auto', trans
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (targetRef.current && tooltipRef.current) {
+      const rect = targetRef.current.getBoundingClientRect();
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+
+      setTooltipPosition({
+        top: rect.bottom + window.scrollY + 10,
+        left: rect.left + window.scrollX + (rect.width - tooltipRect.width) / 2,
+      });
+
+      setVisible(true);
+    }
+  }, [text, visible]);
 
   return (
     <div ref={targetRef} className="relative inline-block" onMouseEnter={showTooltip}>
